@@ -47,16 +47,19 @@ while True:
         # Envia uma mensagem GET ao servidor para obter os dados dos clientes
         httpRequest = {'tipo': 'GET'}
         # Envia a mensagem e imprime a resposta do servidor
-        msg = send_msg(httpRequest)
-        dados = send_msg(httpRequest)['dados']
+        httpResponse = send_msg(httpRequest)
+        dados = httpResponse['dados']
         if len(dados) == 0:
-            print('\n "HTTP Response: "',msg,'\n')
+            print('\n "HTTP Response: "',httpResponse,'\n')
             print("Nenhum cliente cadastrado.\n")
         else:
-            print('\n "HTTP Response: "',msg,'\n')
+            print('\n "HTTP Response: "',httpResponse,'\n')
             print("Clientes cadastrados:\n")
             for cliente in dados:
                 print(f"Nome: {cliente['nome']}, Email: {cliente['email']}, Senha: {cliente['senha']}")
 
     else:
-        print("Opção inválida.")
+        msg = {'tipo': 'Bad Request'}
+        httpResponse = send_msg(msg)
+        print('\n "HTTP Response: "',httpResponse,'\n')
+        print("Opção inválida.\n")

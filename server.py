@@ -28,11 +28,10 @@ def handle_client(conn):
 
         # Converte a mensagem JSON recebida em um dicionário Python
         httpRequest = json.loads(data)
-
+        print("HTTP Request: ",httpRequest)
         
         # Verifica o tipo de mensagem
         if httpRequest['tipo'] == 'POST':
-            print("HTTP Request: ",httpRequest)
             # Adiciona os dados recebidos ao array
             dados.append(httpRequest['dados'])
             # Envia uma mensagem de confirmação com código de status HTTP 201
