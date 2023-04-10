@@ -27,7 +27,7 @@ def send_msg(msg):
 # Loop principal do cliente
 while True:
     # Pede ao usuário que digite uma opção
-    op = input("\nDigite 1 para adicionar um novo cliente ou 2 para listar os clientes cadastrados: ")
+    op = input("\nDigite 1 para adicionar um novo cliente\n2 para listar os clientes cadastrados\n3 para alterar informaçoes de um usuário ")
 
     if op == '1':
         # Pede ao usuário que digite o nome, email e senha
@@ -57,6 +57,19 @@ while True:
             print("Clientes cadastrados:\n")
             for cliente in dados:
                 print(f"Nome: {cliente['nome']}, Email: {cliente['email']}, Senha: {cliente['senha']}")
+
+    elif op == '3':
+        id = input("Digite o id do usuário que deseja alterar: ")
+        nome = input("Digite o nome do cliente: ")
+        email = input("Digite o email do cliente: ")
+        senha = input("Digite a senha do cliente: ")
+
+        dados = {'id':id, 'nome': nome, 'email': email, 'senha': senha}
+        httpRequest = {'tipo':'PUT','dados' : dados}
+
+        httpResponse = send_msg(httpRequest)
+        print('\n',httpResponse,'\n')
+        print(httpResponse['msg'],'\n')
 
     else:
         msg = {'tipo': 'Bad Request'}
