@@ -59,7 +59,7 @@ def handle_client(conn):
             id_Request = httpRequest['dados']['id']
 
             if httpRequest['dados']['id'] == '' or httpRequest['dados']['nome'] == '' or httpRequest['dados']['email'] == '' or httpRequest['dados']['senha'] == '':
-                httpResponse = {'status': '400 Bad Request', 'content-type': 'text/plain', 'msg': 'Campo inválido.'}
+                httpResponse = {'status': '409 Conflict', 'content-type': 'text/plain', 'msg': 'Campo inválido.'}
                 conn.sendall(json.dumps(httpResponse).encode())
             id_exists = False
             for user in dados:
